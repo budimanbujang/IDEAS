@@ -31,12 +31,16 @@ const GUILD_BADGE_COLORS: Record<string, string> = {
   red: "bg-red-100 text-red-800",
 };
 
-export default async function ChallengeDetailPage({
+export function generateStaticParams() {
+  return MOCK_CHALLENGES.map((c) => ({ challengeId: c.id }));
+}
+
+export default function ChallengeDetailPage({
   params,
 }: {
-  params: Promise<{ challengeId: string }>;
+  params: { challengeId: string };
 }) {
-  const { challengeId } = await params;
+  const { challengeId } = params;
   const challenge = MOCK_CHALLENGES.find((c) => c.id === challengeId);
 
   if (!challenge) {

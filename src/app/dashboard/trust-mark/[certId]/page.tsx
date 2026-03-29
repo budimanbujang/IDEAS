@@ -29,12 +29,12 @@ const STATUS_MAP: Record<string, { bg: string; text: string; label: string }> = 
   expired: { bg: "bg-red-100", text: "text-red-800", label: "Expired" },
 };
 
-interface PageProps {
-  params: Promise<{ certId: string }>;
+export function generateStaticParams() {
+  return MOCK_CERTIFICATIONS.map((c) => ({ certId: c.id }));
 }
 
-export default async function CertificationDetailPage({ params }: PageProps) {
-  const { certId } = await params;
+export default function CertificationDetailPage({ params }: { params: { certId: string } }) {
+  const { certId } = params;
   const cert = MOCK_CERTIFICATIONS.find((c) => c.id === certId);
 
   if (!cert) {

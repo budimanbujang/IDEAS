@@ -30,12 +30,12 @@ const TRUST_MARK_COLORS: Record<TrustMarkLevel, string> = {
   gold: "border-yellow-400 bg-yellow-50 text-yellow-800",
 };
 
-interface PageProps {
-  params: Promise<{ modelId: string }>;
+export function generateStaticParams() {
+  return MOCK_MODELS.map((m) => ({ modelId: m.id }));
 }
 
-export default async function ModelDetailPage({ params }: PageProps) {
-  const { modelId } = await params;
+export default function ModelDetailPage({ params }: { params: { modelId: string } }) {
+  const { modelId } = params;
   const model = MOCK_MODELS.find((m) => m.id === modelId);
 
   if (!model) {
